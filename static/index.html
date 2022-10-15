@@ -1,0 +1,80 @@
+<html lang="en">
+
+<head>
+    <title>Registration</title>
+    <style>
+        #reg-form {
+            border: 2px solid black;
+            background-color: rgb(123, 189, 247);
+            height: 200px;
+            width: 250px;
+            text-align: center;
+            margin-left: 40%;
+            margin-top: 20vh;
+            box-shadow: 0px 3px 3px 10px rgb(129, 123, 123);
+            z-index: 100px;
+            scale: 150%;
+        }
+        
+        input {
+            width: 200px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            line-height: 10px;
+        }
+        
+        .btn {
+            background-color: rgb(21, 108, 230);
+            font-weight: 30px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Registration</h1>
+    <form id="reg-form" action="/login" method="post">
+        <input type="text" autocomplete="off" id="Username" placeholder="Username" name="username" />
+        <input type="password" id="password" placeholder="password" name="password" />
+        <input type="submit" value="Submit Form" class="btn" />
+
+    </form>
+
+    <script>
+        const form = document.getElementById("reg-form")
+        form.addEventListener('submit', registerUser)
+
+        async function registerUser(event) {
+            event.preventDefault()
+            const username = document.getElementById('Username').value
+            const password = document.getElementById('password').value
+
+            const result = await fetch('/api/register', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                        "Accept": "application/json; odata=verbose"
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password
+                    })
+                })
+                .then((res) => res.json())
+
+
+            alert(result.status)
+
+            // if (result.status === "ok") {
+            //     alert('success')
+
+            // } else {
+            //     alert(result.error)
+            // }
+        }
+    </script>
+</body>
+
+</html>
