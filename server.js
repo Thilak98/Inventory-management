@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/store', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }).then(() => { console.log("connected to database...") })
-    .catch(() => console.log("unable to connect..."))
+    .catch(() => {console.log("unable to connect...")})
 
 
 //app.use('/', express.static(path.join(__dirname, '.')));
